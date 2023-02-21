@@ -1,2 +1,2 @@
 # jornada-backend-ada
-Implementação do exercícios da formação backend Ada
+Implementação de exercícios da formação backend Ada
