@@ -5,7 +5,9 @@ import org.example.enums.Classificacao;
 import org.example.enums.Locomocao;
 import org.example.model.*;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -26,11 +28,20 @@ public class Main {
                 .filter(animal -> Locomocao.VOA.equals(animal.getLocomocao()))
                 .collect(Collectors.toList());
 
-        System.out.println("Animais carnívoros: " + animaisCarnivoros);
-        System.out.println("Animais herbíveros: " + animaisHerbivoros);
-        System.out.println("Animais carnívoros que voam: " + carnivorosVoadores);
+        Optional<Animal> max = animais.stream()
+                .max(new Comparator<Animal>() {
+                    @Override
+                    public int compare(Animal a, Animal b) {
+                        return Integer.compare(a.getPeso(), b.getPeso());
+                    }
+                });
 
 
+        System.out.println("Animais carnívoros: "+animaisCarnivoros);
+        System.out.println("Animais herbíveros: "+animaisHerbivoros);
+        System.out.println("Animais carnívoros que voam: "+carnivorosVoadores);
+        max.isPresent();
+        System.out.println("Animal mais pesado: "+max.get());
     }
 
     private static List<Animal> createAnimalsList() {
